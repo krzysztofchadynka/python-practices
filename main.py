@@ -1,5 +1,20 @@
-from data_analyze.DataImporter import DataImporter
+from validators.FileFormatValidator import FileFormatValidator
+from validators.FilePathValidator import FilePathValidator
 
-data_importer = DataImporter()
-data_importer.create_sample_dataframe()
-print(data_importer.get_sample_dataframe())
+print('DataFrame - Demo')
+print('File format: [c]sv, [j]son, [x]ml')
+file_format_validator = FileFormatValidator()
+
+while True:
+    file_format = input()
+    if not file_format_validator.validate(file_format):
+        print(file_format_validator.get_error_message_content())
+        continue
+    else:
+        break
+
+print('File path:')
+file_path = input()
+file_path_validator = FilePathValidator()
+if not file_path_validator.validate(file_path):
+    print(file_path_validator.get_error_message_content())
