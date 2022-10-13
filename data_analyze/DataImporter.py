@@ -2,34 +2,20 @@ import pandas as pd
 
 
 class DataImporter:
-    def __init__(self):
-        self.sample_dataframe = None
+    def __init__(self, file_format: str, file_path: str):
+        self.file_format = file_format
+        self.file_path = file_path
 
-    def create_sample_dataframe(self):
-        self.sample_dataframe = pd.DataFrame(self.__get_sample_dataframe_content())
+    def import_file(self) -> pd.DataFrame:
+        return self.__import_file_by_extension()
 
-    def get_sample_dataframe(self):
-        return self.sample_dataframe
+    def __import_file_by_extension(self) -> pd.DataFrame:
+        if self.file_format == 'c':
+            return pd.read_csv(self.file_path)
+        elif self.file_format == 'j':
+            return pd.read_json(self.file_path)
+        elif self.file_format == 'x':
+            return pd.read_xml(self.file_path)
 
-    @staticmethod
-    def __get_sample_dataframe_content():
-        return [
-            {
-                'country': 'Poland',
-                'continent': 'Europe',
-                'points': 1000,
-                'description': 'Lorem ipsum',
-            },
-            {
-                'country': 'Germany',
-                'continent': 'Europe',
-                'points': 700,
-                'description': 'Dolor sit amet',
-            },
-            {
-                'country': 'Croatia',
-                'continent': 'Europe',
-                'points': 700,
-                'description': 'Lorem ipsum',
-            }
-        ]
+        print('Given file extension not supported.')
+        pass
