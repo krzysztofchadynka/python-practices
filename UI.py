@@ -24,8 +24,16 @@ class UI:
         return DataImporter('p', 'sample-import-file.parquet').import_file()
 
     def import_user_file(self):
-        print('File format: [c]sv, [j]son, [x]ml')
+        file_format = self.__select_file_format()
+        file_path = self.__select_file_path()
+
+        return DataImporter(file_format, file_path).import_file()
+
+    @staticmethod
+    def __select_file_format() -> str:
         file_format_validator = FileFormatValidator()
+
+        print('File format: [c]sv, [j]son, [x]ml')
 
         while True:
             file_format = input()
@@ -34,13 +42,17 @@ class UI:
                 print(file_format_validator.get_error_message_content())
                 continue
             else:
-                break
+                return file_format
+
+    @staticmethod
+    def __select_file_path() -> str:
+        file_path_validator = FilePathValidator()
 
         print('File path:')
         file_path = input()
-        file_path_validator = FilePathValidator()
+
         if not file_path_validator.validate(file_path):
             print(file_path_validator.get_error_message_content())
             exit(0)
 
-        return DataImporter(file_format, file_path).import_file()
+        return file_path
