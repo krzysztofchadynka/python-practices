@@ -9,3 +9,4 @@ data_frame = ui.import_sample_file() if file_source == 's' else ui.import_user_f
 if data_frame is not None:
     print('Imported file structure:', end='\n')
     print(data_frame)
+    ui.interpret_file(data_frame)

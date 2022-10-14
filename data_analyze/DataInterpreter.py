@@ -34,3 +34,6 @@ class DataInterpreter:
 
     def get_many_columns(self, column_names: list) -> pd.DataFrame:
         return self.data_frame.loc[:, column_names]
+
+    def get_column_names(self):
+        return self.data_frame.columns
