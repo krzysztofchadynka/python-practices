@@ -1,3 +1,5 @@
+# I'm not sure now if using validation like this makes sense,
+# but I wanted to try using interfaces in Python :)
 from validators.FileSourceValidator import FileSourceValidator
 from validators.FileFormatValidator import FileFormatValidator
 from validators.FilePathValidator import FilePathValidator
@@ -7,8 +9,19 @@ from data_analyze.DataInterpreter import DataInterpreter
 import pandas as pd
 
 
-# TODO: This class is temporary should be refactored
+# TODO: This class is temporary should be refactored / removed / split into lower pieces
 class UI:
+    @staticmethod
+    def select_functionality():
+        print('Python practices')
+        print('Krzysztof Chadynka, krzysztof.chadynka@tivix.com')
+        print('Available functionalities')
+        print('[1] - AWS S3')
+        print('[2] - Pandas solutions')
+        print('[3] - AWS Athena')
+
+        return int(input())
+
     @staticmethod
     def select_file_source() -> str:
         file_source_validator = FileSourceValidator()
