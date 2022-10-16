@@ -19,3 +19,18 @@ class Athena:
         tables = self.cursor.execute('show tables in ' + database_name).fetchall()
 
         return pd.DataFrame(tables)
+
+    def get_data_from_selected_table(
+            self,
+            database_name: str,
+            table_name: str,
+            limit: int = None
+    ):
+        sql_parts = ['select * from {}.{} '.format(database_name, table_name)]
+
+        if limit:
+            sql_parts.append('limit ' + str(limit))
+
+        data = self.cursor.execute(''.join(sql_parts)).fetchall()
+
+        return pd.DataFrame(data)

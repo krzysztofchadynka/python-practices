@@ -62,3 +62,12 @@ elif functionality == 3:
 
     elif athena_functionality == 2:
         print(athena.get_tables_in_database(input('Database name: ')))
+
+    elif athena_functionality == 3:
+        database_name = input('Database name: ')
+        table_name = input('Table name: ')
+        selected_limit = input('Limit (optional): ')
+        limit = int(selected_limit) if selected_limit else None
+
+        data = athena.get_data_from_selected_table(database_name, table_name, limit)
+        print(data)
