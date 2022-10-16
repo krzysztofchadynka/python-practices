@@ -14,3 +14,8 @@ class Athena:
         databases = self.cursor.execute('show databases').fetchall()
 
         return pd.DataFrame(databases)
+
+    def get_tables_in_database(self, database_name: str) -> pd.DataFrame:
+        tables = self.cursor.execute('show tables in ' + database_name).fetchall()
+
+        return pd.DataFrame(tables)

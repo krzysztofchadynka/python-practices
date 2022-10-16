@@ -59,3 +59,6 @@ elif functionality == 3:
 
     if athena_functionality == 1:
         print(athena.get_databases_list())
+
+    elif athena_functionality == 2:
+        print(athena.get_tables_in_database(input('Database name: ')))
