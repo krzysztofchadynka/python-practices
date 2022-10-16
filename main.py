@@ -1,5 +1,6 @@
 from UI import UI
 from integrations.S3 import S3
+from integrations.Athena import Athena
 
 ui = UI()
 
@@ -46,4 +47,15 @@ elif functionality == 2:
         ui.interpret_file(data_frame)
 
 elif functionality == 3:
-    print('AWS S3 Athena using pyathena - WIP')
+    athena = Athena(
+        input('S3 Athena output directory: '),
+        input('Region name: ')
+    )
+
+    print('[1] - List available databases')
+    print('[2] - List tables in the selected database')
+    print('[3] - Get data from selected table')
+    athena_functionality = int(input())
+
+    if athena_functionality == 1:
+        print(athena.get_databases_list())
